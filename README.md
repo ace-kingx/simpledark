@@ -10,3 +10,9 @@ directory name: /.conky/"file here"
 then check the file path on your conky manager
 
 file path: ~/.conky/simpledark/simpledark-conkyrc
+
+
+
+PREVIEW
+
+![alt text](https://github.com/ace-kingx/simpledark/blob/master/SimpleDark/simpledark-preview.png)
