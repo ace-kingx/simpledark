@@ -1,0 +1,112 @@
+
+############################################################################################
+# Title simpledark@side
+# Ace King
+# https://github.com/ace-kingx
+# 3/23/19
+# Learning from others people's code
+# Use with Conky Manager											   #
+############################################################################################
+
+#BACKGROUND AND FORMAT
+background yes
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+imlib_cache_size 0
+update_interval 1
+cpu_avg_samples 1
+format_human_readable
+
+#ALIGNMENT
+alignment middle_left
+gap_x 0
+gap_y 0
+minimum_size 250 820
+maximum_width 400
+
+#WINDOW
+own_window yes
+own_window_type normal
+own_window_class Conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_colour 333333
+own_window_argb_visual no
+own_window_argb_value 0
+
+border_inner_margin 0
+border_outer_margin 0
+
+#DEFAULT
+default_bar_size 100 6
+draw_shades no
+default_shade_color 000000
+draw_outline no
+default_outline_color 000000
+draw_borders no
+draw_graph_borders yes
+default_graph_size 40,220
+show_graph_scale no
+show_graph_range no
+
+#FONT
+override_utf8_locale yes
+use_xft yes
+xftfont Ubuntu:size=12,weight:normal
+xftalpha 1
+uppercase no
+max_text_width 40
+
+#INITIALIZE
+default_color ffffff
+color1 ffffff
+color2 A5A5A5
+color3 81CAE0
+color4 E1FF91
+
+TEXT
+# day/time
+# info
+# $sysname
+${voffset 0}${alignc}$nodename${font Ubuntu:size=16}${color1}OS${font}
+${color4}${hr 1}${color}
+${goto 10}
+${goto 10}$sysname${alignr 5}$kernel
+${goto 10}Desktop:${alignr 5}$XDG_CURRENT_DESKTOP
+${goto 10}Uptime:${alignr 5}$uptime
+${goto 10}Temp:${alignr 5}${hwmon 1 temp 1}°C
+${color4}${hr 1}${color}
+#
+# CPU INFO BY GRAPH
+${goto 10}${voffset 5}CPU1: ${cpu cpu1}%${alignr 10}${exec sensors|grep 'Core 0'|awk '{print $3}'}
+${goto 10}${voffset -5}${color2}${cpugraph cpu1 32,220 6AB04C BADC58}
+${goto 10}${voffset 0}${color1}CPU2: ${cpu cpu2}%${alignr 10}${exec sensors|grep 'Core 1'|awk '{print $3}'}
+${goto 10}${voffset -5}${color2}${cpugraph cpu2 32,220 6AB04C BADC58}
+#
+# PROCESS
+${voffset -5}${font Ubuntu:size=12,weight:normal}${color1}${alignc}Top Processes ${font}
+${voffset 4}${goto 10}${top name 1}${alignr 10}${top cpu 1}%
+${goto 10}${voffset -2}${top name 2}${alignr 10}${top cpu 2}%
+${goto 10}${voffset -2}${top name 3}${alignr 10}${top cpu 3}%
+${goto 10}${voffset -2}${top name 4}${alignr 10}${top cpu 4}%
+#
+# MEMORY
+${color4}${hr 1}${color}${voffset 5}
+${goto 10}${font Ubuntu:size=12}Memory${goto 100}${color4}$membar${alignr 10}${color1}$memperc%
+${goto 10}${color1}${voffset -2}${font}${top_mem name 1}${alignr 10}${top mem 1}%
+${goto 10}${voffset -2}${top_mem name 2}${alignr 10}${top mem 2}%
+${goto 10}${voffset -2}${top_mem name 3}${alignr 10}${top mem 3}%
+${goto 10}${voffset -2}${top_mem name 4}${alignr 10}${top mem 4}%
+#
+# NETWORK
+${color4}${hr 1}${color}${voffset 5}
+${goto 10}SSID:${alignr 10}${wireless_essid wlp2s0}
+${goto 10}Signal:${goto 100}${color4}${wireless_link_bar wlp2s0}${color1}${alignr 10}${wireless_link_qual_perc wlp2s0}%
+${goto 10}IP: ${alignr 10}${addr wlp2s0}
+${voffset 5}${goto 10}${color1}Upspeed:${alignr 10}${upspeed wlp2s0}
+${goto 10}${voffset 0}Total up:${alignr 10}${totalup wlp2s0}
+${goto 10}${color2}${upspeedgraph wlp2s0 32,220 6AB04C BADC58 100 -l}
+${goto 10}${color1}Down:$color1${alignr 10}${downspeed wlp2s0}
+${goto 10}Total down:${alignr 10}${totaldown wlp2s0}
+${goto 10}${color2}${downspeedgraph wlp2s0 32,220 6AB04C BADC58 100 -l}
